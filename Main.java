@@ -3,6 +3,8 @@ package Project1;
 import java.util.Scanner;
 
 public class Main {
+    private static final String UNIVERSAL_PASSWORD = "admin123"; // Set your universal password here
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         StudentDAO studentDAO = new StudentDAO();
@@ -39,7 +41,14 @@ public class Main {
                 case 3:
                     System.out.print("Enter name to delete: ");
                     String deleteName = scanner.nextLine();
-                    studentDAO.deleteStudentByName(deleteName);
+                    System.out.print("Enter universal password: ");
+                    String password = scanner.nextLine();
+
+                    if (password.equals(UNIVERSAL_PASSWORD)) {
+                        studentDAO.deleteStudentByName(deleteName);
+                    } else {
+                        System.out.println("Incorrect universal password. Deletion failed.");
+                    }
                     break;
 
                 case 4:
